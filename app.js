@@ -1,27 +1,18 @@
-// Get the necessary elements
-const inputText = document.getElementById("inputText");
-const speakButton = document.getElementById("speakButton");
 
-// Function to pronounce the word
-function speakWord() {
-  const textToSpeak = inputText.value.trim();
+        const inputText = document.getElementById('inputText');
+        const speakButton = document.getElementById('speakButton');
 
-  // Check if the Web Speech API is supported in the browser
-  if ("speechSynthesis" in window) {
-    // Create a SpeechSynthesisUtterance object
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        function speakWord() {
+            const textToSpeak = inputText.value.trim();
 
-    // Use the default voice of the user's device
-    utterance.voice = speechSynthesis.getVoices()[0];
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.voice = speechSynthesis.getVoices()[0];
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech is not supported in your browser. Please try a different browser.');
+            }
+        }
 
-    // Speak the word
-    speechSynthesis.speak(utterance);
-  } else {
-    alert(
-      "Text-to-speech is not supported in your browser. Please try a different browser."
-    );
-  }
-}
-
-// Add event listener to the button
-speakButton.addEventListener("click", speakWord);
+        speakButton.addEventListener('click', speakWord);
+  
